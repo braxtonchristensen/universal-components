@@ -1,0 +1,55 @@
+diff --git a/node_modules/react-native-storybook-loader/src/writer/index.js b/node_modules/react-native-storybook-loader/src/writer/index.js
+index 5f640a0..a19c9e8 100644
+--- a/node_modules/react-native-storybook-loader/src/writer/index.js
++++ b/node_modules/react-native-storybook-loader/src/writer/index.js
+@@ -1,11 +1,11 @@
+-const fs = require('fs');
+-const path = require('path');
++const fs = require("fs");
++const path = require("path");
+ 
+ const {
+   getRelativePath,
+-  ensureFileDirectoryExists,
+-} = require('../utils/pathHelper');
+-const { encoding } = require('../constants');
++  ensureFileDirectoryExists
++} = require("../utils/pathHelper");
++const { encoding } = require("../constants");
+ 
+ function getRelativePaths(fromDir, files) {
+   return files
+@@ -26,14 +26,14 @@ const template = files =>
+ // https://github.com/elderfo/react-native-storybook-loader.git
+ 
+ function loadStories() {
+-${formatter(files, file => `\trequire('${file}');`, '\n')}
++${formatter(files, file => `\trequire('${file}');`, "\n")}
+ }
+ 
+ const stories = [
+-${formatter(files, file => `\t'${file}'`, ',\n')}
++${formatter(files, file => `\t'${file}'`, ",\n")}
+ ];
+ 
+-module.exports = {
++export {
+   loadStories,
+   stories,
+ };
+@@ -41,7 +41,7 @@ module.exports = {
+ 
+ const writeFile = (files, outputFile) => {
+   const relativePaths = getRelativePaths(path.dirname(outputFile), files).map(
+-    file => file.substring(0, file.lastIndexOf('.'))
++    file => file.substring(0, file.lastIndexOf("."))
+   ); // strip file extensions
+ 
+   const output = template(relativePaths);
+@@ -52,5 +52,5 @@ const writeFile = (files, outputFile) => {
+ };
+ 
+ module.exports = {
+-  writeFile,
++  writeFile
+ };

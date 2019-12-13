@@ -1,0 +1,84 @@
+{
+  "name": "@vivintsolar/universal-components",
+  "version": "1.0.0-beta.0",
+  "description": "Component Library for React Native, Expo and React applications",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "run-p start:**",
+    "start:native": "expo start --ios",
+    "prestart:native": "rnstl",
+    "start:web": "start-storybook -c .storybook -p 6006",
+    "postinstall": "patch-package",
+    "clean": "rm -rf node_modules && yarn",
+    "prerelease": "node scripts/preparePackage.js",
+    "release": "release-it --no-git",
+    "postrelease": "node scripts/cleanPackage.js",
+    "build-storybook": "build-storybook",
+    "build": "rm -rf lib && yarn build:copy:web && yarn build:copy:native && yarn build:lib",
+    "build:copy:web": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx'  './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/*.native.tsx' -e './src/**/*.ios.tsx' -e './src/**/*.android.tsx' ./lib/web",
+    "build:copy:native": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx' './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/**.web.tsx' ./lib/native",
+    "build:lib": "npx babel --no-babelrc ./lib/web --out-dir ./lib/web --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "react",
+    "native",
+    "react-native-web"
+  ],
+  "author": "Braxton Christensen",
+  "license": "MIT",
+  "peerDependencies": {},
+  "dependencies": {
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-typescript": "^7.7.4",
+    "@storybook/addon-actions": "^5.2.5",
+    "@storybook/addon-info": "^5.2.5",
+    "@storybook/addon-knobs": "^5.2.5",
+    "@storybook/addon-links": "^5.2.5",
+    "@storybook/addon-ondevice-actions": "^5.2.5",
+    "@storybook/addon-ondevice-knobs": "^5.2.5",
+    "@storybook/addons": "^5.2.5",
+    "@storybook/preset-typescript": "^1.1.0",
+    "@storybook/react": "^5.2.5",
+    "@storybook/react-native": "^5.2.5",
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.5",
+    "@types/react": "^16.8.23",
+    "@types/react-native": "^0.57.65",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-react-docgen": "^3.1.0",
+    "babel-plugin-react-native-web": "^0.11.7",
+    "babel-preset-expo": "^7.1.0",
+    "copyfiles": "^2.1.1",
+    "expo": "^35.0.0",
+    "jest": "^24.9.0",
+    "npm-run-all": "^4.1.5",
+    "patch-package": "^6.2.0",
+    "postinstall-postinstall": "^2.0.0",
+    "react": "^16.11.0",
+    "react-docgen-typescript-loader": "^3.3.0",
+    "react-dom": "16.8.3",
+    "react-native-storybook-loader": "^1.8.1",
+    "react-native-web": "^0.11.7",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.3"
+  },
+  "private": true,
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src",
+        "./packages"
+      ],
+      "pattern": "**/*.stories.tsx",
+      "outputFile": "./storybook/storyLoader.ts"
+    }
+  }
+}
