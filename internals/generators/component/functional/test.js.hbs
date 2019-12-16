@@ -1,0 +1,25 @@
+import React from 'react';
+import { render } from 'react-native-testing-library';
+import {{ properCase name }} from '../index';
+
+describe('<{{ properCase name }} />', () => {
+  describe('snapshots', () => {
+    it('should match snapshot', () => {
+      const rendered = render(<{{properCase name}} />);
+
+      expect(rendered.firstChild).toMatchSnapshot();
+    });
+  });
+
+  describe('unit', () => {
+    it('should render the text', () => {
+      const { queryByText } = render(<{{properCase name}} />);
+
+      expect(queryByText('edit me!')).toBeTruthy();
+    });
+  })
+
+  it('should have unit tests specified', () => {
+    expect(true).toEqual(false);
+  });
+});

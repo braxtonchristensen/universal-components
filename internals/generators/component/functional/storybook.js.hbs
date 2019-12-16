@@ -1,0 +1,17 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react-native';
+import { withKnobs } from '@storybook/addon-knobs';
+
+import CenterView from '{{centerviewPath path}}';
+import {{ properCase name }} from '.';
+
+storiesOf('{{ properCase name }}', module)
+  .addDecorator((getStory: () => JSX.Element) => {
+    return <CenterView>{getStory()}</CenterView>;
+  })
+  .addDecorator(withKnobs)
+  .add('default', () => {
+    return (
+      <{{ properCase name }} />
+    );
+  });
