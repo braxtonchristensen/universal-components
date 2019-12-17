@@ -2,7 +2,8 @@
   "name": "@vivintsolar/universal-components",
   "version": "1.0.0-beta.0",
   "description": "Component Library for React Native, Expo and React applications",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "lib/web/index.js",
+  "react-native": "lib/native/index.js",
   "scripts": {
     "generate": "plop --plopfile internals/generators/index.js",
     "start": "run-p start:**",
@@ -19,7 +20,8 @@
     "build:copy:web": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx'  './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/*.native.tsx' -e './src/**/*.ios.tsx' -e './src/**/*.android.tsx' ./lib/web",
     "build:copy:native": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx' './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/**.web.tsx' ./lib/native",
     "build:rename": "node ./scripts/rename.js",
-    "build:lib": "npx babel --no-babelrc ./lib/web --out-dir ./lib/web --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true"
+    "build:lib": "npx babel --no-babelrc ./lib/web --out-dir ./lib/web --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true",
+    "build:lib:native": "npx babel --no-babelrc ./lib/native --out-dir ./lib/native --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true"
   },
   "files": [
     "lib"
@@ -33,7 +35,8 @@
   "license": "MIT",
   "peerDependencies": {},
   "dependencies": {
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
+    "babel-preset-expo": "^8.0.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
@@ -56,19 +59,18 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-react-docgen": "^3.1.0",
     "babel-plugin-react-native-web": "^0.11.7",
-    "babel-preset-expo": "^7.1.0",
     "copyfiles": "^2.1.1",
-    "expo": "^35.0.0",
-    "inquirer-directory": "^2.2.0",
+    "expo": "^36.0.0",
     "glob": "^7.1.6",
+    "inquirer-directory": "^2.2.0",
     "jest": "^24.9.0",
     "npm-run-all": "^4.1.5",
     "patch-package": "^6.2.0",
     "plop": "^2.5.3",
     "postinstall-postinstall": "^2.0.0",
-    "react": "^16.11.0",
+    "react": "16.9.0",
     "react-docgen-typescript-loader": "^3.3.0",
-    "react-dom": "16.8.3",
+    "react-dom": "16.9.0",
     "react-native-storybook-loader": "^1.8.1",
     "react-native-web": "^0.11.7",
     "ts-jest": "^24.1.0",

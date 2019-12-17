@@ -10,12 +10,10 @@ import { View, TextInput } from "react-native";
 //   value: string | number;
 // }
 
-export const Input = () => {
+export default function Input() {
   return (
     <View>
       <TextInput />
     </View>
   );
-};
-
-export default Input;
+}
