@@ -18,6 +18,7 @@
     "build": "rm -rf lib && yarn build:copy:web && yarn build:copy:native && yarn build:lib",
     "build:copy:web": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx'  './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/*.native.tsx' -e './src/**/*.ios.tsx' -e './src/**/*.android.tsx' ./lib/web",
     "build:copy:native": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx' './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/**.web.tsx' ./lib/native",
+    "build:rename": "node ./scripts/rename.js",
     "build:lib": "npx babel --no-babelrc ./lib/web --out-dir ./lib/web --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true"
   },
   "files": [
@@ -59,6 +60,7 @@
     "copyfiles": "^2.1.1",
     "expo": "^35.0.0",
     "inquirer-directory": "^2.2.0",
+    "glob": "^7.1.6",
     "jest": "^24.9.0",
     "npm-run-all": "^4.1.5",
     "patch-package": "^6.2.0",
