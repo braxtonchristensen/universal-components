@@ -7,7 +7,7 @@ if (fs.existsSync(path.join(__dirname, "../package.json"))) {
     fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8")
   );
 
-  packageJson.main = "src/index.js";
+  packageJson.main = "node_modules/expo/AppEntry.js";
   delete packageJson["react-native"];
 
   fs.writeFileSync(

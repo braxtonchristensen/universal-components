@@ -13,7 +13,7 @@ const stories = [
 	'../src/Input/Input.stories'
 ];
 
-export {
+module.exports = {
   loadStories,
   stories,
 };

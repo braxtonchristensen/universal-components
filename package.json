@@ -1,6 +1,6 @@
 {
   "name": "@vivintsolar/universal-components",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.4",
   "description": "Component Library for React Native, Expo and React applications",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -9,16 +9,14 @@
     "start:native": "expo start --ios",
     "prestart:native": "rnstl",
     "start:web": "start-storybook -c .storybook -p 6006",
-    "postinstall": "patch-package",
     "clean": "rm -rf node_modules && yarn",
     "prerelease": "node scripts/preparePackage.js",
     "release": "release-it --no-git",
     "postrelease": "node scripts/cleanPackage.js",
     "build-storybook": "build-storybook",
-    "build": "rm -rf lib && yarn build:copy:web && yarn build:copy:native && yarn build:lib",
-    "build:copy:web": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx'  './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/*.native.tsx' -e './src/**/*.ios.tsx' -e './src/**/*.android.tsx' ./lib/web",
-    "build:copy:native": "copyfiles -u 1 './src/**/*.ts' './src/**/*.tsx' './src/**/*.json' './src/**/assets/**' -e './src/**/*.stories.tsx' -e './src/**/*.spec.tsx' -e './src/**/**.web.tsx' ./lib/native",
-    "build:lib": "npx babel --no-babelrc ./lib/web --out-dir ./lib/web --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true"
+    "build": "rm -rf lib && run-p build:**",
+    "build:lib": "npx babel --no-babelrc ./src --out-dir ./lib/web --extensions .ts,.tsx --plugins=babel-plugin-react-native-web --presets=@babel/react,@babel/preset-typescript --compact true --ignore './src/**/*.stories.tsx','./src/**/*.spec.tsx','./src/**/*.native.tsx','./src/**/*.ios.tsx','./src/**/*.android.tsx'",
+    "build:native": "npx babel --no-babelrc ./src --out-dir ./lib/native --extensions .ts,.tsx --presets=babel-preset-expo --ignore './src/**/*.stories.tsx','./src/**/*.spec.tsx','./src/**/*.web.tsx'"
   },
   "files": [
     "lib"
@@ -31,9 +29,7 @@
   "author": "Braxton Christensen",
   "license": "MIT",
   "peerDependencies": {},
-  "dependencies": {
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
@@ -67,13 +63,14 @@
     "react": "^16.11.0",
     "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-storybook-loader": "^1.8.1",
     "react-native-web": "^0.11.7",
+    "release-it": "^12.4.3",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.3"
   },
-  "private": true,
   "config": {
     "react-native-storybook-loader": {
       "searchDir": [
@@ -83,5 +80,16 @@
       "pattern": "**/*.stories.tsx",
       "outputFile": "./storybook/storyLoader.ts"
     }
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braxtonchristensen/universal-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/braxtonchristensen/universal-components/issues"
+  },
+  "homepage": "https://github.com/braxtonchristensen/universal-components#readme"
 }
